@@ -136,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li class="active"><a data-hover="Acceuil" href="Etudiant.php">Acceuil</a></li>
 								<li><a data-hover="Thémes" href="Etudiant.html#theme" >Thémes </a></li>
 								<li><a data-hover="Fiche de Voeux" href="ficheVoeux.php#fiche" >Fiche de Voeux </a></li>
-								<li><a data-hover="Notifications" href="notification.php#notif" >Notifications</a></li>
+								<li><a data-hover="Notifications" href="notifications.php#notif" >Notifications</a></li>
 
 								<li><a data-hover="Profile" href="profileET.php#prfl" >Profile</a></li>
 							</ul>
