@@ -177,7 +177,7 @@ if(isset($_POST['update'])){
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Adminstration
+        Enseignants
       </h1>
     </section>
 
@@ -191,6 +191,7 @@ if(isset($_POST['update'])){
           <th>Nom</th>
           <th>Prenom</th>
           <th>Grade</th>
+          <th>Email</th>
           <th>Actions</th>
         </tr>
         </thead>
@@ -202,12 +203,19 @@ if(isset($_POST['update'])){
         <td>  <?=$m['nom']?>  </td>
         <td>  <?=$m['prenom']?>  </td>
         <td>  <?=$m['grade']?>  </td>
+        <?php
+         $req=$bdd->prepare("SELECT login FROM comptes WHERE id=".$m['id']);
+         $req->execute();
+         while($mm=$req->fetch()){
+         ?>
+        <td>  <?=$mm['login']?>  </td>
+      <?php }?>
         <td>
 
 
-      <button class="btn btn-danger btn-sm" onclick="deleteme(<?php echo $m['id'] ?>)" > Supprimer</button>
+      <button class="btn btn-danger btn-md" onclick="deleteme(<?php echo $m['id'] ?>)" > Supprimer</button>
       <a href="profileEns.php?&id_ens=<?= $m['id'] ?>">
-      <button class="btn btn-default btn-sm" ><i class="fa fa-ey "></i> Détail</button></a>
+      <button class="btn btn-default btn-md" ><i class="fa fa-ey "></i> Détail</button></a>
 
       </td>
         </tr>

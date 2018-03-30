@@ -234,7 +234,7 @@ if(isset($_POST['update'])){
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">EtudiantsEncadre</a></li>
               <li><a href="#timeline" data-toggle="tab">ThemesPropose</a></li>
-              <li><a href="#settings" data-toggle="tab">Modifier</a></li>
+              <li><a href="#settings" data-toggle="tab">ModfierProfile</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -250,52 +250,84 @@ if(isset($_POST['update'])){
               <div class="tab-pane" id="settings">
                 <form class="form-horizontal">
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="inputName" class="col-sm-2 control-label">Code</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                      <input type="email" class="form-control" id="inputName" value="<?= $compt['code'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <label for="inputEmail" class="col-sm-2 control-label">Nom</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      <input type="email" class="form-control" id="inputEmail" value="<?= $compt['nom'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="inputName" class="col-sm-2 control-label">Prenom</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                      <input type="text" class="form-control" id="inputName" value="<?= $compt['prenom'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
+                    <label for="inputExperience" class="col-sm-2 control-label">Grade</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                      <input type="text" class="form-control" id="grade" value="<?= $compt['grade'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                    <label for="commitent" class="col-sm-2 control-label">Comittent</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                      <input type="text" class="form-control" id="inputSkills" value="<?= $compt['commitent'] ?>">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="datNai" class="col-sm-2 control-label">DateNaisance</label>
+
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" id="datNai" value="<?= $compt['datNai'] ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="telephone" class="col-sm-2 control-label">Telephone</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="telephone" value="<?= $compt['tlf'] ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="telephone" class="col-sm-2 control-label">Adress</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="adress" value="<?= $compt['adress'] ?>">
+                    </div>
+                  </div>
+                  <?php
+                   $rec=$bdd->prepare("SELECT * FROM comptes where id=".$compt['compt_id']);
+                   $rec->execute();
+
+                   $pp=$rec->fetch();
+
+                   ?>
+                  <div class="form-group">
+                    <label for="login" class="col-sm-2 control-label">Login</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="login" value="<?= $pp['login'] ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="mp" class="col-sm-2 control-label"> MotDePasse  </label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="mp" value="<?= $pp['mdp'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button type="submit" class="btn btn-danger">Modifier</button>
                     </div>
                   </div>
                 </form>
