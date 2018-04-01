@@ -211,7 +211,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"></div>
 		</div>
 <script src="js/jquery.vide.min.js"></script>
-	<div data-vide-bg="images/l7.jpeg">
+	<div data-vide-bg="images/plan.jpeg">
 
 			<div class="w3ls_banner_info">
 				<div class="container">
