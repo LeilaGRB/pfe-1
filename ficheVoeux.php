@@ -158,7 +158,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</ul>
 		</div>
 		<div class="col-md-4 top-right">
-			<a href="#" data-toggle="modal" data-target="#myModal1"><span></span> Déconnexion</a>
+			<a href="logout.php" data-toggle="modal" data-target="#myModal1"><span></span> Déconnexion</a>
 			<!--<a href="#" data-toggle="modal" data-target="#myModal2"><span></span> Inscription</a>-->
 		</div>
 		<div class="clearfix"></div>
