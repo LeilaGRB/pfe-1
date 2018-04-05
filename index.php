@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+    session_start();
 require_once("class.user.php");
 $login = new USER();
 
@@ -9,10 +10,10 @@ if($login->is_loggedin()!="")
 	if($grade=="admin"){
 	 $login->redirect('Etudiant.php');
 	}
-	if($grade=="etudiant"){
+	if($grade=="Etudiant"){
 	 $login->redirect('Etudiant.php');
 	}
-	if($grade=="enseignant"){
+	if($grade=="Enseignant"){
 	 $login->redirect('Enseignant.php');
 	}
 }
@@ -29,10 +30,10 @@ if(isset($_POST['connexion']))
 	 if($grade=="admin"){
 		$login->redirect('Etudiant.php');
 	 }
-	 if($grade=="etudiant"){
+	 if($grade=="Etudiant"){
 		$login->redirect('Etudiant.php');
 	 }
-	 if($grade=="enseignant"){
+	 if($grade=="Enseignant"){
 		$login->redirect('Enseignant.php');
 	 }
 	}
@@ -41,6 +42,36 @@ if(isset($_POST['connexion']))
 		echo '<script language="javascript">';
 		echo 'alert("Utilisateur ou mot de passe incorrect")';
 		echo '</script>';
+	}
+}else if(isset($_POST['inscription']))
+{
+	  /**recuperer les informations dans le formulaire d'inscription**/
+	$pass = strip_tags($_POST['password']);
+	$confpass = strip_tags($_POST['confpassword']);
+	if($pass == $confpass)
+    {
+
+        $array = array('nom' => strip_tags($_POST['nom']),'prenom' => strip_tags($_POST['prenom']),'email' => strip_tags($_POST['email']),'user' => strip_tags($_POST['user']),'specialite' => strip_tags($_POST['specialite']),'password' => strip_tags($_POST['password']),'code' => strip_tags($_POST['code']));
+        $valide = $login->inscription($array);	
+        if($valide){
+	       if($login->doLogin(strip_tags($_POST['email']),$pass))
+	       { 
+	            if(strip_tags($_POST['user'])=="Etudiant"){
+	       	      $login->redirect('Etudiant.php');
+	            }
+	            if(strip_tags($_POST['user'])=="Enseignant"){
+		           $login->redirect('Enseignant.php');
+	            }
+	       }
+	    }else{
+    	echo '<script language="javascript">';
+	    echo 'alert("Erreur d\'inscription ")';
+	    echo '</script>';
+	     }
+	}else{
+    	echo '<script language="javascript">';
+	    echo 'alert("mot de passe non verifier")';
+	    echo '</script>';
 	}
 }
 ?>
@@ -140,13 +171,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h3>Inscription</h3>
 					<form action="#" method="post">
-						<input type="text" name="Name" placeholder="votre nom" required=""/>
-						<input type="text" name="Prenom" placeholder="votre Prénom" required=""/>
-						<input type="text" name="specialite" placeholder="Spécialité" required=""/>
-						<input type="email" name="Email" class="email" placeholder="Email" required=""/>
-						<input type="password" name="Password" class="password" placeholder="mot de passe" required=""/>
-						<input type="password" name="Password" class="password" placeholder="Confirmer mot de passe" required=""/>
-						<input type="submit" value="Inscription">
+						<input type="text" name="nom" placeholder="votre nom" required=""/>
+						<input type="text" name="prenom" placeholder="votre Prénom" required=""/>
+						<input type="text" list="specialites" name="specialite" placeholder="Spécialité" required=""/>
+                            <datalist id="specialites">
+                            <?php  
+                              $specialites=$login->runQuery1("SELECT specialite FROM specialites");
+                              while($specialite=$specialites->fetch())
+                              echo "<option value=".$specialite['specialite'].">".$specialite['specialite']."</option>";
+                            ?>
+                            </datalist>
+						<input type="text" list="tasb" name="user" placeholder="Vous etes.." required=""/>
+                            <datalist id="tasb">
+                                <option value="Enseignant">Enseignant</option>
+                                <option value="Etudiant">Etudiant</option>
+                            </datalist>
+						<input type="text" name="code" placeholder="Code" required=""/>
+						<input type="email" name="email" class="email" placeholder="Email" required=""/>
+						<input type="password" name="password" class="password" placeholder="mot de passe" required=""/>
+						<input type="password" name="confpassword" class="password" placeholder="Confirmer mot de passe" required=""/>
+						<input type="submit" name="inscription" value="Inscription">
 					</form>
 			</div>
 		</div>
@@ -162,9 +206,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="col-md-4 top-middle">
 			<ul>
-				<li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="www.gmail.com"><i class="fa fa-google-plus"></i></a></li>
+				<li><a href="https://:www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+				<li><a href="https://www.gmail.com"><i class="fa fa-google-plus"></i></a></li>
 
 			</ul>
 		</div>
@@ -288,9 +332,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="footer-right">
 				<div class="wthree-icon">
-					<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-					<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-					<a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+					<a href="https://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i></a>
+					<a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.gmail.com" class="google"><i class="fa fa-google-plus"></i></a>
 				</div>
 			</div>
 			<div class="clearfix"> </div>
