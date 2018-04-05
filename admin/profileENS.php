@@ -11,36 +11,33 @@ $id = $bdd->prepare("SELECT * FROM ensegniants where id=".$compte);
 $id->execute();
 
 $compt=$id->fetch();
+$id2 = $bdd->prepare("SELECT * FROM sujets WHERE ens_id=".$compte);
+$id2->execute();
 
-
-/* Supprimer un medecin de la base de donnee*/
-
-if(isset($_GET['supprimer_ens'])){
-    $id_ens = (int) $_GET['supprimer_ens'];
-    $id = $bdd->prepare("SELECT compt_id FROM ensegniants WHERE id=".$id_ens);
-    $id->execute();
-    $compte=$id->fetch();
-    $supp = $bdd->prepare("DELETE FROM comptes WHERE id=".$compte['compt_id']);
-    $supp->execute();
-     $suppr = $bdd->prepare("DELETE FROM ensegniants WHERE id=".$id_ens);
-     $suppr->execute();
-    header('Location: Enseignants.php');
-}
 
 /*Requete mise a jour bdd*/
 if(isset($_POST['update'])){
-  $id_med=$_POST['id_med'];
+  $code=$_POST['code'];
   $nom=$_POST['nom'];
-  $prenom=$_POST['prenom'];
-  $dn=$_POST['datepicker'];
-  $adress=$_POST['adress'];
-  $N_tel=$_POST['N_tel'];
-  $grade=$_POST['grade'];
-  $specialite=$_POST['specialite'];
-
-   $exu = $auth_user->runQuery("UPDATE medecin set nom='".$nom."',prenom='".$prenom."',DN='".$dn."',adresse='".$adress."',N_tel='".$N_tel."',grade='".$grade."',specialite='".$specialite."' where id_med='".$id_med."'");
+    $nom=$_POST['nom'];
+    $prenom=$_POST['prenom'];
+    $grade=$_POST['grade'];
+    $comittent=$_POST['commitent'];
+    $date=$_POST['datNai'];
+    $telephone=$_POST['telephone'];
+    $adress=$_POST['adress'];
+    $login=$_POST['login'];
+    $mp=$_POST['mp'];
+   $exu = $bdd->prepare("UPDATE ensegniants set code='".$code."', nom='".$nom."',prenom='".$prenom."'
+   ,grade='".$grade."',commitent='".$comittent."',datNai='".$date."',tlf='".$telephone."',adress='".$adress."' where id='".$compte."'");
    $exu->execute();
-   header('location:medecins.php');
+    $exu = $bdd->prepare("select compt_id from ensegniants where id=".$compte);
+    $exu->execute();
+    $m=$exu->fetch();
+    $cp=$m['compt_id'];
+    $exu = $bdd->prepare("UPDATE comptes set login='".$login."',mdp='".$mp."' where id=".$cp);
+    $exu->execute();
+   header('location:profileEns.php?&id_ens='.$compte);
 }
 
 
@@ -95,7 +92,7 @@ if(isset($_POST['update'])){
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>G</b>DP</span>
       <!-- logo for regular state and mobile devices -->
@@ -162,7 +159,7 @@ if(isset($_POST['update'])){
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu Principale</li>
-       <li><a href="index.html"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
+       <li><a href="index.php"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
         <li><a href="Enseignants.php"><i class="fa fa-book"></i> <span>Enseignants</span></a></li>
         <li><a href="Etudiants.php"><i class="fa fa-book"></i> <span>Etudiants</span></a></li>
         <li><a href="Themes.php"><i class="fa fa-book"></i> <span>Themes</span></a></li>
@@ -243,44 +240,57 @@ if(isset($_POST['update'])){
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="timeline">
-
+                  <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                          <th>SUJET PROPOSE</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php while($m=$id2->fetch()) { ?>
+                          <tr>
+                              <td>  <?=$m['titre']?>  </td>
+                          </tr>
+                      <?php }?>
+                      </tbody>
+                  </table>
               </div>
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="post">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Code</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" value="<?= $compt['code'] ?>">
+                      <input type="number" class="form-control" id="code" name="code" value="<?= $compt['code'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Nom</label>
+                    <label for="text" class="col-sm-2 control-label">Nom</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" value="<?= $compt['nom'] ?>">
+                      <input type="text" class="form-control" id="nom" name="nom" value="<?= $compt['nom'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Prenom</label>
+                    <label for="text" class="col-sm-2 control-label">Prenom</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" value="<?= $compt['prenom'] ?>">
+                      <input type="text" class="form-control" id="prenom" name="prenom" value="<?= $compt['prenom'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputExperience" class="col-sm-2 control-label">Grade</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="grade" value="<?= $compt['grade'] ?>">
+                      <input type="text" class="form-control" id="grade" name="grade" value="<?= $compt['grade'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="commitent" class="col-sm-2 control-label">Comittent</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" value="<?= $compt['commitent'] ?>">
+                      <input type="text" class="form-control" id="commitent" name ="commitent" value="<?= $compt['commitent'] ?>">
                     </div>
                   </div>
 
@@ -288,21 +298,21 @@ if(isset($_POST['update'])){
                     <label for="datNai" class="col-sm-2 control-label">DateNaisance</label>
 
                     <div class="col-sm-10">
-                      <input type="date" class="form-control" id="datNai" value="<?= $compt['datNai'] ?>">
+                      <input type="date" class="form-control" id="datNai" name="datNai" value="<?= $compt['datNai'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="telephone" class="col-sm-2 control-label">Telephone</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="telephone" value="<?= $compt['tlf'] ?>">
+                      <input type="text" class="form-control" id="telephone" name="telephone" value="<?= $compt['tlf'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="telephone" class="col-sm-2 control-label">Adress</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="adress" value="<?= $compt['adress'] ?>">
+                      <input type="text" class="form-control" id="adress" name="adress" value="<?= $compt['adress'] ?>">
                     </div>
                   </div>
                   <?php
@@ -316,18 +326,18 @@ if(isset($_POST['update'])){
                     <label for="login" class="col-sm-2 control-label">Login</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="login" value="<?= $pp['login'] ?>">
+                      <input type="email" class="form-control" id="login" name="login" value="<?= $pp['login'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="mp" class="col-sm-2 control-label"> MotDePasse  </label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="mp" value="<?= $pp['mdp'] ?>">
+                      <input type="text" class="form-control" id="mp" name="mp" value="<?= $pp['mdp'] ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Modifier</button>
+                        <input type="submit" name="update" id="update" value="Modifier" class="btn btn-success" />
                     </div>
                   </div>
                 </form>
@@ -415,29 +425,7 @@ if(isset($_POST['update'])){
       }
     })
   })
-  function deleteme (delid)
-     {
-       swal({
-        title: "Êtes-vous sûr?",
-        text: "Vous ne pourrez pas récupérer ces informations",
-          type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Oui, supprimez !",
-            cancelButtonText: "Non, annulez!",
-            closeOnConfirm: false,
-            closeOnCancel: false
-             },
-            function(isConfirm){
-            if (isConfirm) {
-          window.location.href='?supprimer_ens='+delid+'';
-          swal("Supprimé!", "infirmier supprimé .", "success");
-           } else {
-             swal("Annulé", "infirmier non supprime :)", "error");
-             }
-          });
-        }
   </script>
-  </script>
+  </body>
   </body>
   </html>
