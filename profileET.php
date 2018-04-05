@@ -1,3 +1,53 @@
+<?php
+
+    require_once("session.php");
+
+    require_once("class.user.php");
+    $auth_user = new USER();
+
+		if(isset($_POST['OUI']))
+		{
+			header('location:logout.php?logout=true');
+		}
+		
+		$etud=$auth_user->runQuery1("SELECT * FROM etudiants where compt_id =".$_SESSION['user_session']);
+		$etud=$etud->fetch();
+
+		$compte=$auth_user->runQuery1("SELECT * FROM comptes where id =".$_SESSION['user_session']);
+		$compte=$compte->fetch();
+
+		$specialites=$auth_user->runQuery1("SELECT * FROM specialites");
+
+	if(isset($_POST['enregistrer'])){
+
+		$auth_user->runQuery1("UPDATE etudiants SET nom='".strip_tags($_POST['nom'])."' , prenom='".strip_tags($_POST['prenom'])."' , specialite='".strip_tags($_POST['specialite'])."' , tlf='".strip_tags($_POST['tlf'])."' , datNai='".strip_tags($_POST['datNai'])."' , adress='".strip_tags($_POST['adress'])."' WHERE id =".$etud['id']);
+
+		if($compte['login']!=strip_tags($_POST['email'])){
+			$auth_user->runQuery1("UPDATE comptes SET login='".strip_tags($_POST['email'])."' WHERE id =".$compte['id']);
+		}
+
+		echo '<script language="javascript">';
+		echo 'alert("Les modifications sont bien enregistrés")';
+		echo '</script>';
+
+		$auth_user->redirect('profileET.php#prfl');
+	}
+
+	if(isset($_POST['modifier'])){
+		echo $compte['mdp']." ".strip_tags($_POST['mdp']);
+        if($compte['mdp']==strip_tags($_POST['mdp'])){
+        	echo "string";
+			/*if(strip_tags($_POST['nvmpd'])==strip_tags($_POST['cnfmdp'])){
+			$auth_user->runQuery1("UPDATE comptes SET mdp='".strip_tags($_POST['nvmdp'])."' WHERE id =".$compte['id']);
+		    }else{}*/
+		}else{}
+	}
+
+?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -94,10 +144,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="col-md-4 top-middle">
 			<ul>
-				<li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="www.gmail.com"><i class="fa fa-google-plus"></i></a></li>
-
+				
+					<a href="https://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i></a>
+					<a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.gmail.com" class="google"><i class="fa fa-google-plus"></i></a>
+				
 			</ul>
 		</div>
 		<div class="col-md-4 top-right">
@@ -122,7 +173,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</button>
 					</div>
 					<div class="logo">
-						<h1><a class="navber-brand" href="indexEtudiant.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Gestion des PFE</a></h1>
+						<h1><a class="navber-brand" href="Etudiant.php"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Gestion des PFE</a></h1>
 					</div>
 					<div class="collapse navbar-collapse navbar-right navigation-right" id="bs-example-navbar-collapse-1">
 						<nav class="link-effect-3" id="link-effect-3">
@@ -234,48 +285,74 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<form action="#" method="post">
 				<div class="col-md-6 admission_left">
 				<h2>Modifier vos Information</h2>
-				 <div class="select-block1">
-					<select required="">
-						<option value="">Titre*</option>
-						<option value="">Mr.</option>
-						<option value="">Ms.</option>
-				   </select>
-				 </div>
+				    <!-- input pour le nom d'etudaint -->
 				 <div class="input-group input-group1">
-					<input class="form-control has-dark-background" name="nom "id="slider-name" placeholder="Nom*" type="text" required="">
+					<input class="form-control has-dark-background" name="nom" id="slider-name" value="<?php echo $etud['nom'];  ?>" type="text" required=""> 
 				 </div>
+				    <!-- input pour le prenom d'etudaint -->
 				 <div class="input-group input-group1">
-					<input class="form-control has-dark-background" name="prenom" id="slider-name1" placeholder="Prénom*" type="text" required="">
+					<input class="form-control has-dark-background" name="prenom" id="slider-name1" value="<?php echo $etud['prenom'];  ?>" type="text" required="">
 				 </div>
-				                   <div class="input-group input-group1">
-					<input class="form-control has-dark-background" name="dateN" id="slider-name" placeholder="date*" type="date" required="">
+				    <!-- input pour la date de naissance d'etudaint -->
+				 <div class="input-group input-group1">
+					<input class="form-control has-dark-background" name="datNai" id="slider-name" value="<?php echo $etud['datNai'];  ?>" type="date" required="">
 				 </div>
+				    <!-- select pour la specialité d'etudaint -->
 					<div class="select-block1">
-					<select required="">
-						<option value="">Specialité*</option>
-						<option value="">GL</option>
-						<option value="">RSD</option>
-						<option value="">SIC</option>
-						<option value="">MID</option>
+					<select name="specialite">
+						<option disabled="">Specialités</option>
+						<?php
+
+						while($spt = $specialites->fetch())
+						{
+							if($etud['specialite'] == $spt['specialite']){
+                                echo "<option value='".$spt['specialite']."' selected>".$spt['specialite']."</option>";
+							}else{
+                                echo "<option value='".$spt['specialite']."'>".$spt['specialite']."</option>";
+							}
+						}
+
+						  ?>
+						
 				   </select>
 				 </div>
-
+				    <!-- input pour l'adress' d'etudaint -->
 				 <div class="input-group input-group1">
-					<input class="form-control has-dark-background" name="adresse "id="slider-name" placeholder="adresse*" type="text" required="">
+					<input class="form-control has-dark-background" name="adress" id="slider-name" placeholder="Adresse..." value="<?php echo $etud['adress'];?>" type="text" required>
 				 </div>
-
-
+				    <!-- input pour l'email' d'etudaint -->
 	             <div class="input-group input-group1">
-	                <input class="form-control has-dark-background" name="email" id="slider-name2" placeholder="  email*" type="email" required="">
+	                <input class="form-control has-dark-background" name="email" id="slider-name2" value="<?php echo $compte['login'];  ?>" type="email" required="">
+	             </div>
+				    <!-- input pour le telephon d'etudaint -->
+	             <div class="input-group input-group1">
+	                <input class="form-control has-dark-background" name="tlf" id="slider-name4" placeholder="N° Tél ..." value="<?php echo $etud['tlf'];  ?>" type="tel" required="">
 	             </div>
 
-	             <div class="input-group input-group1">
-	                <input class="form-control has-dark-background" name="tel" id="slider-name4" placeholder="N° Tél*" type="tel" required="">
-	             </div>
-
-	            <input type="submit" value="Enregistrer" class="course-submit">
+	            <input type="submit" name="enregistrer" value="Enregistrer" class="course-submit">
 	   	   </div>
              </form>
+
+			<form action="#" method="post">
+				<div class="col-md-6 admission_left">
+				<h2>Modifier le mot de passe</h2>
+				    <!-- input pour l'encient mot de passe' -->
+				 <div class="input-group input-group1">
+					<input class="form-control has-dark-background" name="mdp " id="slider-name" placeholder="Votre mot de passe ..." type="text" required=""> 
+				 </div>
+				    <!-- input pour le nouveau mot de passe -->
+				 <div class="input-group input-group1">
+					<input class="form-control has-dark-background" name="nvmpd" id="slider-name1" placeholder="Votre nouveau mot de passe ..." type="text" required="">
+				 </div>
+				    <!-- input pour la connfiremation de mot de passe -->
+				 <div class="input-group input-group1">
+					<input class="form-control has-dark-background" name="cnfmdp" id="slider-name" placeholder="Connfirmer votre nouveau mot de passe ..." type="text" required="">
+				 </div>
+
+	            <input type="submit" name="modifier" value="Enregistrer" class="course-submit">
+	   	   </div>
+             </form>
+
 	   	   </div>
 	   	</div>
 
@@ -296,9 +373,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="footer-right">
 				<div class="wthree-icon">
-					<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-					<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-					<a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+					
+					<a href="https://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i></a>
+					<a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.gmail.com" class="google"><i class="fa fa-google-plus"></i></a>
+				
 				</div>
 			</div>
 			<div class="clearfix"> </div>
