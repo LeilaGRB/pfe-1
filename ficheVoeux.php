@@ -108,7 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div id="small-dialog1" class="mfp-hide book-form">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h3>Déconnexion </h3>
-					<form action="#" method="post">
+					<form action="logout.php" method="post">
 						<h5> voulez vous déconnecter ?</h5>
 							<input type="submit" value="OUI"> <input type="submit" value="NON">
 
@@ -149,9 +149,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="col-md-4 top-middle">
 			<ul>
-				<li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="www.gmail.com"><i class="fa fa-google-plus"></i></a></li>
+				<li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+				
+				<li><a href="https://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+				
+				<li><a href="https://www.gmail.com"><i class="fa fa-google-plus"></i></a></li>
 
 			</ul>
 		</div>
@@ -184,7 +186,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 							<ul class="nav1 navbar-nav nav nav-wil">
 								<li class="active"><a data-hover="Acceuil" href="Etudiant.php">Acceuil</a></li>
-								<li><a data-hover="Thémes" href="Etudiant.html#theme" >Thémes </a></li>
+								<li><a data-hover="Thémes" href="Etudiant.php#theme" >Thémes </a></li>
 								<li><a data-hover="Fiche de Voeux" href="ficheVoeux.php#fiche" >Fiche de Voeux </a></li>
 								<li><a data-hover="Notifications" href="notification.php#notif" >Notifications</a></li>
 
@@ -336,9 +338,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="footer-right">
 				<div class="wthree-icon">
-					<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-					<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-					<a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+					<a href="https://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i></a>
+					<a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.gmail.com" class="google"><i class="fa fa-google-plus"></i></a>
 				</div>
 			</div>
 			<div class="clearfix"> </div>
