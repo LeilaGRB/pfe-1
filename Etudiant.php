@@ -5,9 +5,7 @@
     require_once("class.user.php");
     $auth_user = new USER();
 
-
     $grade = $_SESSION['grade'];
-
 
 		if(isset($_POST['OUI']))
 		{
@@ -110,10 +108,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="col-md-4 top-middle">
 			<ul>
-				<li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="www.gmail.com"><i class="fa fa-google-plus"></i></a></li>
-
+				
+					<a href="https://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i></a>
+					<a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.gmail.com" class="google"><i class="fa fa-google-plus"></i></a>
+				
 			</ul>
 		</div>
 		<div class="col-md-4 top-right">
@@ -138,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</button>
 					</div>
 					<div class="logo">
-						<h1><a class="navber-brand" href="indexEtudiant.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Gestion des PFE</a></h1>
+						<h1><a class="navber-brand" href="Etudiant.php"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Gestion des PFE</a></h1>
 					</div>
 					<div class="collapse navbar-collapse navbar-right navigation-right" id="bs-example-navbar-collapse-1">
 						<nav class="link-effect-3" id="link-effect-3">
@@ -147,7 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li class="active"><a data-hover="Acceuil" href="Etudiant.php">Acceuil</a></li>
 								<li><a data-hover="Thémes" href="#theme" >Thémes </a></li>
 								<li><a data-hover="Fiche de Voeux" href="ficheVoeux.php#fiche" >Fiche de Voeux </a></li>
-								<li><a data-hover="Notifications" href="notification.php#notif" >Notifications</a></li>
+								<li><a data-hover="Notifications" href="notifications.php#notif" >Notifications</a></li>
 
 								<li><a data-hover="Profile" href="profileET.php#prfl" >Profile</a></li>
 							</ul>
@@ -244,132 +243,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="agile-heading heading">
 				<h3>Liste des thémes</h3>
 			</div>
+			<?php  
+
+			$spec_id=$auth_user->runQuery1("SELECT id FROM specialites where specialite =(SELECT specialite FROM etudiants where compt_id =".$_SESSION['user_session'].")");
+			$spec_id=$spec_id->fetch();
+
+			$themes=$auth_user->runQuery1("SELECT id,titre FROM sujets where  id in (SELECT  sujet_id FROM specialite__sujets where specialite_id =".$spec_id['id'].")");
+
+			  $cmpt=1;
+			  while($theme=$themes->fetch()){
+			?>
 			<div class="wthree-services-grids">
 				<div class="col-sm-3 wthree-services">
 					<div class="wthree-services-grid">
 						<div class="wthree-services-info">
 							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 1</h4>
+							<h4>Théme <?php echo $cmpt;  ?> </h4>
 							<div class="w3ls-border"> </div>
 						</div>
 						<div class="wthree-services-captn">
-							<h4>Théme 1</h4>
-							<p>titre du theme 1 ou klk chose (php)</p>
+							<h4>Théme <?php echo $cmpt;  ?> </h4>
+							<p><?php echo $theme['titre'];  ?> </p>
 						</div>
 					</div>
 				</div>
-</div>
+            </div>
+			<?php  
+			  $cmpt++;
+			  }
+			?>
 
-<div class="wthree-services-grids">
-				<div class="col-sm-3 wthree-services">
-					<div class="wthree-services-grid">
-						<div class="wthree-services-info">
-							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 2</h4>
-							<div class="w3ls-border"> </div>
-						</div>
-						<div class="wthree-services-captn">
-							<h4>Théme 2</h4>
-							<p>titre du theme 2 ou klk chose (php)</p>
-						</div>
-					</div>
-				</div>
-</div>
-<div class="wthree-services-grids">
-				<div class="col-sm-3 wthree-services">
-					<div class="wthree-services-grid">
-						<div class="wthree-services-info">
-							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 3</h4>
-							<div class="w3ls-border"> </div>
-						</div>
-						<div class="wthree-services-captn">
-							<h4>Théme 3</h4>
-							<p>titre du theme 3 ou klk chose (php)</p>
-						</div>
-					</div>
-				</div>
-</div>
-
-<div class="wthree-services-grids">
-				<div class="col-sm-3 wthree-services">
-					<div class="wthree-services-grid">
-						<div class="wthree-services-info">
-							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 4</h4>
-							<div class="w3ls-border"> </div>
-						</div>
-						<div class="wthree-services-captn">
-							<h4>Théme 4</h4>
-							<p>titre du theme 4 ou klk chose (php)</p>
-						</div>
-					</div>
-				</div>
-</div>
-	<div class="wthree-services-grids">
-				<div class="col-sm-3 wthree-services">
-					<div class="wthree-services-grid">
-						<div class="wthree-services-info">
-							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 5</h4>
-							<div class="w3ls-border"> </div>
-						</div>
-						<div class="wthree-services-captn">
-							<h4>Théme 5</h4>
-							<p>titre du theme 5 ou klk chose (php)</p>
-						</div>
-					</div>
-				</div>
-</div>
-
-<div class="wthree-services-grids">
-				<div class="col-sm-3 wthree-services">
-					<div class="wthree-services-grid">
-						<div class="wthree-services-info">
-							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 6</h4>
-							<div class="w3ls-border"> </div>
-						</div>
-						<div class="wthree-services-captn">
-							<h4>Théme 6</h4>
-							<p>titre du theme 6 ou klk chose (php)</p>
-						</div>
-					</div>
-				</div>
-</div>
-<div class="wthree-services-grids">
-				<div class="col-sm-3 wthree-services">
-					<div class="wthree-services-grid">
-						<div class="wthree-services-info">
-							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 7</h4>
-							<div class="w3ls-border"> </div>
-						</div>
-						<div class="wthree-services-captn">
-							<h4>Théme 7</h4>
-							<p>titre du theme 7 ou klk chose (php)</p>
-						</div>
-					</div>
-				</div>
-</div>
-
-<div class="wthree-services-grids">
-				<div class="col-sm-3 wthree-services">
-					<div class="wthree-services-grid">
-						<div class="wthree-services-info">
-							<i class="fa fa-list" aria-hidden="true"></i>
-							<h4>Théme 8</h4>
-							<div class="w3ls-border"> </div>
-						</div>
-						<div class="wthree-services-captn">
-							<h4>Théme 8</h4>
-							<p>titre du theme 8 ou klk chose (php)</p>
-						</div>
-					</div>
-				</div>
-</div>
-
-</div></div>
+    </div></div>
 <!--//theme section-->
 
 
@@ -382,9 +286,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="footer-right">
 				<div class="wthree-icon">
-					<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-					<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-					<a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+					<a href="https://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i></a>
+					<a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.gmail.com" class="google"><i class="fa fa-google-plus"></i></a>
 				</div>
 			</div>
 			<div class="clearfix"> </div>
