@@ -4,6 +4,56 @@
 	License: Creative Commons Attribution 3.0 Unported
 	License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<?php
+
+    require_once("session.php");
+
+    require_once("class.user.php");
+    $auth_user = new USER();
+
+    $grade = $_SESSION['grade'];
+
+		if(isset($_POST['OUI']))
+		{
+			header('location:logout.php?logout=true');
+		}
+		
+		$etud=$auth_user->runQuery1("SELECT * FROM etudiants where compt_id =".$_SESSION['user_session']);
+		$etud=$etud->fetch();
+
+	if(isset($_POST['choix'])){
+
+		$auth_user->runQuery1("DELETE FROM fiche__de__vues where etud_id =".$etud['id']);
+		$cmpt=1;
+
+		while($cmpt <= 5){
+			if(strip_tags($_POST['choix'.$cmpt])!= "vide"){
+				$test=$auth_user->runQuery1("SELECT id FROM fiche__de__vues where etud_id =".$etud['id']." and sujet_id =".strip_tags($_POST['choix'.$cmpt]));
+
+		         if($test->rowCount() ==0){
+				    $array=array(':etud_id' => $etud['id'],
+					    ':sujet_id'=> strip_tags($_POST['choix'.$cmpt]));
+		            $ajouter=$auth_user->runQuery2("INSERT INTO fiche__de__vues (etud_id, sujet_id) VALUES (:etud_id, :sujet_id)",$array);
+
+		            if ($ajouter) {
+		                echo '<script language="javascript">';
+		                echo 'alert("Fiche de vue est bien enregistré")';
+		                echo '</script>';
+		               }else{
+		                echo '<script language="javascript">';
+		                echo 'alert("Erreur d\'enregistrement")';
+		                echo '</script>';
+		               }
+		           }
+		    
+			}
+        $cmpt++;
+        }
+	}
+
+    
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <!-- Head -->
@@ -127,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</button>
 					</div>
 					<div class="logo">
-						<h1><a class="navber-brand" href="indexEtudiant.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Gestion des PFE</a></h1>
+						<h1><a class="navber-brand" href="/pfemaster/Etudiant.php"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Gestion des PFE</a></h1>
 					</div>
 					<div class="collapse navbar-collapse navbar-right navigation-right" id="bs-example-navbar-collapse-1">
 						<nav class="link-effect-3" id="link-effect-3">
@@ -136,7 +186,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li class="active"><a data-hover="Acceuil" href="Etudiant.php">Acceuil</a></li>
 								<li><a data-hover="Thémes" href="Etudiant.html#theme" >Thémes </a></li>
 								<li><a data-hover="Fiche de Voeux" href="ficheVoeux.php#fiche" >Fiche de Voeux </a></li>
-								<li><a data-hover="Notifications" href="notifications.php#notif" >Notifications</a></li>
+								<li><a data-hover="Notifications" href="notification.php#notif" >Notifications</a></li>
 
 								<li><a data-hover="Profile" href="profileET.php#prfl" >Profile</a></li>
 							</ul>
@@ -236,58 +286,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<form action="#" method="post">
 				<div class="col-md-6 admission_left">
 				<h2>Liste des thémes suggérés</h2>
+			        <?php  
+			          $cmpt=1;
+
+			          $exist=$auth_user->runQuery1("SELECT id,titre FROM sujets where  id in (SELECT sujet_id FROM fiche__de__vues where etud_id =".$etud['id'].")");
+
+			          while ( $cmpt <= 5) {
+			        ?>
+
 				   <div class="select-block1">
-					<select required="">
-						<option value="">Theme 1</option>
-						<option value="">Theme 2</option>
-						<option value="">Theme 3</option>
-						<option value="">Theme 4</option>
+					<select name="<?php echo "choix".$cmpt;  ?>">
+					    <option value="vide"> </option>
+			        <?php 
+			          $spec_id=$auth_user->runQuery1("SELECT id FROM specialites where specialite ='".$etud['specialite']."'");
+			          $spec_id=$spec_id->fetch();
 
+			          $themes=$auth_user->runQuery1("SELECT id,titre FROM sujets where  id in (SELECT  sujet_id FROM specialite__sujets where specialite_id =".$spec_id['id'].")");
 
+			            $fch=$exist->fetch();
+			            $val=0;
+			             while($theme=$themes->fetch()){ 
+			          	if($fch and $val == 0){$val++;
+                            echo "<option value='".$fch['id']."' selected>".$fch['titre']."</option>";
+			          	}else {
+			        ?>
+						<option value="<?php echo $theme['id'];  ?>"><?php echo $theme['titre'];  ?></option>
+                    <?php }}?>
 				   </select>
 				 </div>
-				  <div class="select-block1">
-					<select required="">
-						<option value="">Theme 1</option>
-						<option value="">Theme 2</option>
-						<option value="">Theme 3</option>
-						<option value="">Theme 4</option>
+                    <?php $cmpt++; } ?>
 
-
-				   </select>
-				 </div>
-				  <div class="select-block1">
-					<select required="">
-						<option value="">Theme 1</option>
-						<option value="">Theme 2</option>
-						<option value="">Theme 3</option>
-						<option value="">Theme 4</option>
-
-
-				   </select>
-				 </div>
-				   <div class="select-block1">
-					<select required="">
-						<option value="">Theme 1</option>
-						<option value="">Theme 2</option>
-						<option value="">Theme 3</option>
-						<option value="">Theme 4</option>
-
-
-				   </select>
-				 </div>
-				   <div class="select-block1">
-					<select required="">
-						<option value="">Theme 1</option>
-						<option value="">Theme 2</option>
-						<option value="">Theme 3</option>
-						<option value="">Theme 4</option>
-
-
-				   </select>
-				 </div>
-
-				 <input type="submit" value="Valider" class="course-submit">
+				 <input type="submit" name="choix" value="Valider" class="course-submit" >
 
 </div>
 </div>
