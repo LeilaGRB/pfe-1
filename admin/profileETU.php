@@ -7,12 +7,11 @@
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=test2;charset=utf8', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 $compte=(int) $_GET['id_ens'];
-$id = $bdd->prepare("SELECT * FROM ensegniants where id=".$compte);
+$id = $bdd->prepare("SELECT * FROM etudiants where id=".$compte);
 $id->execute();
 
 $compt=$id->fetch();
-$id2 = $bdd->prepare("SELECT * FROM sujets WHERE ens_id=".$compte);
-$id2->execute();
+
 
 
 /*Requete mise a jour bdd*/
@@ -192,7 +191,7 @@ if(isset($_POST['update'])){
 
               <h3 class="profile-username text-center"><?=$compt['nom']?> <?=$compt['prenom']?> </h3>
 
-              <p class="text-muted text-center"><?=$compt['grade']?></p>
+              <p class="text-muted text-center"><?=$compt['specialite']?></p>
 
 
             </div>
@@ -229,31 +228,13 @@ if(isset($_POST['update'])){
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">EtudiantsEncadre</a></li>
-              <li><a href="#timeline" data-toggle="tab">ThemesPropose</a></li>
+              <li class="active"><a href="#timeline" data-toggle="tab">ThemesChoisi</a></li>
               <li><a href="#settings" data-toggle="tab">ModfierProfile</a></li>
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-
-              <h1>A programmer plus tard</h1>
-              </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="timeline">
-                  <table id="example1" class="table table-bordered table-striped">
-                      <thead>
-                      <tr>
-                          <th>SUJET PROPOSE</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <?php while($m=$id2->fetch()) { ?>
-                          <tr>
-                              <td>  <?=$m['titre']?>  </td>
-                          </tr>
-                      <?php }?>
-                      </tbody>
-                  </table>
+                  <h1>A programmer plus tard</h1>
               </div>
               <!-- /.tab-pane -->
 

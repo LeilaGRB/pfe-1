@@ -27,24 +27,6 @@ if(isset($_GET['supprimer_ens'])){
     header('Location: Enseignants.php');
 }
 
-/*Requete mise a jour bdd*/
-if(isset($_POST['update'])){
-  $id_med=$_POST['id_med'];
-  $nom=$_POST['nom'];
-  $prenom=$_POST['prenom'];
-  $dn=$_POST['datepicker'];
-  $adress=$_POST['adress'];
-  $N_tel=$_POST['N_tel'];
-  $grade=$_POST['grade'];
-  $specialite=$_POST['specialite'];
-
-   $exu = $auth_user->runQuery("UPDATE medecin set nom='".$nom."',prenom='".$prenom."',DN='".$dn."',adresse='".$adress."',N_tel='".$N_tel."',grade='".$grade."',specialite='".$specialite."' where id_med='".$id_med."'");
-   $exu->execute();
-   header('location:medecins.php');
-}
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
