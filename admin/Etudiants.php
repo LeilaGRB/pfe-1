@@ -151,6 +151,7 @@ if(isset($_GET['supprimer_ens'])){
         <li><a href="Etudiants.php"><i class="fa fa-book"></i> <span>Etudiants</span></a></li>
         <li><a href="Themes.php"><i class="fa fa-book"></i> <span>Themes</span></a></li>
         <li><a href="Soutenances.php"><i class="fa fa-book"></i> <span>Soutenances</span></a></li>
+          <li><a href="Voeux.php"><i class="fa fa-book"></i> <span>Voeux</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -188,7 +189,7 @@ if(isset($_GET['supprimer_ens'])){
         <td>  <?=$m['prenom']?>  </td>
         <td>  <?=$m['specialite']?>  </td>
         <?php
-         $req=$bdd->prepare("SELECT login FROM comptes WHERE id=".$m['id']);
+         $req=$bdd->prepare("SELECT login FROM comptes WHERE id=".$m['compt_id']);
          $req->execute();
          while($mm=$req->fetch()){
          ?>
@@ -303,6 +304,6 @@ if(isset($_GET['supprimer_ens'])){
           });
         }
 </script>
-</script>
+</body>
 </body>
 </html>

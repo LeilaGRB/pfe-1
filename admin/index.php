@@ -43,7 +43,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>G</b>DP</span>
       <!-- logo for regular state and mobile devices -->
@@ -110,11 +110,12 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu Principale</li>
-       <li><a href="index.html"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
+       <li><a href="index.php"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
         <li><a href="Enseignants.php"><i class="fa fa-book"></i> <span>Enseignants</span></a></li>
         <li><a href="Etudiants.php"><i class="fa fa-book"></i> <span>Etudiants</span></a></li>
         <li><a href="Themes.php"><i class="fa fa-book"></i> <span>Themes</span></a></li>
         <li><a href="Soutenances.php"><i class="fa fa-book"></i> <span>Soutenances</span></a></li>
+          <li><a href="Voeux.php"><i class="fa fa-book"></i> <span>Voeux</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -191,7 +192,10 @@
             </div>
             <a href="Voeux.php" class="small-box-footer">Détails <i class="fa fa-arrow-circle-right"></i></a>
           </div>
+
         </div>
+          <br/>
+          <h1>INSCRIPTION A VALIDER</h1>
         <!-- ./col -->
       </div>
 
