@@ -43,11 +43,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-<<<<<<< HEAD
-    <a href="index2.html" class="logo">
-=======
     <a href="index.php" class="logo">
->>>>>>> programmerEnseignant
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>G</b>DP</span>
       <!-- logo for regular state and mobile devices -->
@@ -114,20 +110,13 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu Principale</li>
-<<<<<<< HEAD
-       <li><a href="index.html"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
-=======
        <li><a href="index.php"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
->>>>>>> programmerEnseignant
         <li><a href="Enseignants.php"><i class="fa fa-book"></i> <span>Enseignants</span></a></li>
         <li><a href="Etudiants.php"><i class="fa fa-book"></i> <span>Etudiants</span></a></li>
         <li><a href="Themes.php"><i class="fa fa-book"></i> <span>Themes</span></a></li>
         <li><a href="Soutenances.php"><i class="fa fa-book"></i> <span>Soutenances</span></a></li>
-<<<<<<< HEAD
-=======
           <li><a href="Voeux.php"><i class="fa fa-book"></i> <span>Voeux</span></a></li>
           <li><a href="Configuration.php"><i class="fa fa-book"></i> <span>Configuration</span></a></li>
->>>>>>> programmerEnseignant
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -138,87 +127,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-<<<<<<< HEAD
         Adminstration
-=======
-        Administration
->>>>>>> programmerEnseignant
       </h1>
     </section>
 
     <!-- Main content -->
     <section class="content">
-<<<<<<< HEAD
       <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>5</h3>
-
-              <p>Enseignants</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="Enseignants.php" class="small-box-footer">Détails <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>10</h3>
-
-              <p>Etudiants</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="Etudiants.php" class="small-box-footer">Détails <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>8</h3>
-
-              <p>Thémes</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="Themes.php" class="small-box-footer">Détails <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>FICHE DE VOEUX</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="Voeux.php" class="small-box-footer">Détails <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-=======
-
-
-
-              <h1>Programmer Date Limite Validation </h1>
-
->>>>>>> programmerEnseignant
+      <h1>A programmer plus tard </h1>
 
 
     </section>

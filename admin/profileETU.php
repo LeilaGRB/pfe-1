@@ -17,11 +17,18 @@ $compt=$id->fetch();
 /*Requete mise a jour bdd*/
 if(isset($_POST['update'])){
   $code=$_POST['code'];
+<<<<<<< HEAD
   $nom=$_POST['nom'];
     $nom=$_POST['nom'];
     $prenom=$_POST['prenom'];
     $grade=$_POST['grade'];
     $comittent=$_POST['commitent'];
+=======
+    $nom=$_POST['nom'];
+    $prenom=$_POST['prenom'];
+    $spes=$_POST['spes'];
+    $moy=$_POST['moy'];
+>>>>>>> programmerEnseignant
     $date=$_POST['datNai'];
     $telephone=$_POST['telephone'];
     $adress=$_POST['adress'];
@@ -163,6 +170,11 @@ if(isset($_POST['update'])){
         <li><a href="Etudiants.php"><i class="fa fa-book"></i> <span>Etudiants</span></a></li>
         <li><a href="Themes.php"><i class="fa fa-book"></i> <span>Themes</span></a></li>
         <li><a href="Soutenances.php"><i class="fa fa-book"></i> <span>Soutenances</span></a></li>
+<<<<<<< HEAD
+=======
+          <li><a href="Voeux.php"><i class="fa fa-book"></i> <span>Voeux</span></a></li>
+          <li><a href="Configuration.php"><i class="fa fa-book"></i> <span>Configuration</span></a></li>
+>>>>>>> programmerEnseignant
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -202,7 +214,11 @@ if(isset($_POST['update'])){
           <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
+<<<<<<< HEAD
               <h3 class="box-title">A propos de l'enseignant</h3>
+=======
+              <h3 class="box-title">A propos de l'etudiant</h3>
+>>>>>>> programmerEnseignant
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -261,6 +277,7 @@ if(isset($_POST['update'])){
                       <input type="text" class="form-control" id="prenom" name="prenom" value="<?= $compt['prenom'] ?>">
                     </div>
                   </div>
+<<<<<<< HEAD
                   <div class="form-group">
                     <label for="inputExperience" class="col-sm-2 control-label">Grade</label>
                     <div class="col-sm-10">
@@ -282,6 +299,31 @@ if(isset($_POST['update'])){
                       <input type="date" class="form-control" id="datNai" name="datNai" value="<?= $compt['datNai'] ?>">
                     </div>
                   </div>
+=======
+                    <div class="form-group">
+                        <label for="datNai" class="col-sm-2 control-label">DateNaisance</label>
+
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="datNai" name="datNai" value="<?= $compt['datNai'] ?>">
+                        </div>
+                    </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label">Specialite</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="spes" name="spes" value="<?= $compt['specialite'] ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="commitent" class="col-sm-2 control-label">Moyenne</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="commitent" name ="commitent" value="<?= $compt['moyenne_id'] ?>">
+                    </div>
+                  </div>
+
+
+                  
+>>>>>>> programmerEnseignant
                   <div class="form-group">
                     <label for="telephone" class="col-sm-2 control-label">Telephone</label>
 
