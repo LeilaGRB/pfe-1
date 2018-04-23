@@ -147,6 +147,7 @@ if(isset($_GET['supprimer_ens'])){
         <li><a href="Themes.php"><i class="fa fa-book"></i> <span>Themes</span></a></li>
         <li><a href="Soutenances.php"><i class="fa fa-book"></i> <span>Soutenances</span></a></li>
           <li><a href="Voeux.php"><i class="fa fa-book"></i> <span>Voeux</span></a></li>
+          <li><a href="Configuration.php"><i class="fa fa-book"></i> <span>Configuration</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
